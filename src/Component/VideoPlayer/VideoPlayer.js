@@ -180,7 +180,7 @@ const VideoPlayer = () => {
                                     <input
                                         className='addComment'
                                         type="submit"
-                                        value="Add Review"
+                                        value="Add Note"
                                     />
 
                                 </form>
