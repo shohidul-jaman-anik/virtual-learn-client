@@ -41,8 +41,8 @@ const VideoPlayer = () => {
 
 
     const onSubmit = data => {
-        console.log(data)
-        const url = `http://localhost:5000/addNote`
+        // console.log(data)
+        const url = `https://virtual-learn.onrender.com/addNote`
         fetch(url, {
             method: "POST",
             headers: {
@@ -55,17 +55,17 @@ const VideoPlayer = () => {
                 reset()
                 if (result) {
                     setMessage(result.message)
-
+                    setNote(prevNotes => [...prevNotes, data]);
                 }
             }
             )
     };
     useEffect(() => {
-        fetch('http://localhost:5000/allNote')
+        fetch('https://virtual-learn.onrender.com/allNote')
             .then(res => res.json())
             .then(data => {
                 setNote(data.result)
-                console.log(data, "noteee")
+                // console.log(data, "noteee")
             });
     }, []);
 
@@ -74,7 +74,7 @@ const VideoPlayer = () => {
             <div>
                 <div className='videoSection mt-8'>
 
-                    <iframe className='videoPlayer' src={selectedVideo?.videoUrl} frameBorder="0" allowfullscreen   ></iframe>
+                    <iframe className='videoPlayer' src={selectedVideo?.videoUrl} frameBorder="0" allowfullscreen ></iframe>
 
                 </div>
                 <h3 className='videoTitle'>{selectedVideo?.title}</h3>
@@ -84,16 +84,16 @@ const VideoPlayer = () => {
 
                 {/*------------ Pill--------- */}
                 <div>
-                    <div class="border-b border-gray-200 dark:border-gray-700">
-                        <nav class="flex space-x-2" aria-label="Tabs" role="tablist">
-                            <button type="button" class="hs-tab-active:font-semibold hs-tab-active:border-blue-600 hs-tab-active:text-blue-600 py-4 px-1 inline-flex items-center gap-2 border-b-[3px] border-transparent text-lg whitespace-nowrap text-gray-500 hover:text-blue-600  active" id="tabs-with-icons-item-1" data-hs-tab="#tabs-with-icons-1" aria-controls="tabs-with-icons-1" role="tab">
+                    <div className="border-b border-gray-200 dark:border-gray-700">
+                        <nav className="flex space-x-2" aria-label="Tabs" role="tablist">
+                            <button type="button" className="hs-tab-active:font-semibold hs-tab-active:border-blue-600 hs-tab-active:text-blue-600 py-4 px-1 inline-flex items-center gap-2 border-b-[3px] border-transparent text-lg whitespace-nowrap text-gray-500 hover:text-blue-600  active" id="tabs-with-icons-item-1" data-hs-tab="#tabs-with-icons-1" aria-controls="tabs-with-icons-1" role="tab">
                                 Add Note
                             </button>
-                            <button type="button" class="hs-tab-active:font-semibold hs-tab-active:border-blue-600 hs-tab-active:text-blue-600 py-4 px-12 inline-flex items-center gap-2 border-b-[3px] border-transparent text-lg whitespace-nowrap text-gray-500 hover:text-blue-600" id="tabs-with-icons-item-2" data-hs-tab="#tabs-with-icons-2" aria-controls="tabs-with-icons-2" role="tab">
+                            <button type="button" className="hs-tab-active:font-semibold hs-tab-active:border-blue-600 hs-tab-active:text-blue-600 py-4 px-12 inline-flex items-center gap-2 border-b-[3px] border-transparent text-lg whitespace-nowrap text-gray-500 hover:text-blue-600" id="tabs-with-icons-item-2" data-hs-tab="#tabs-with-icons-2" aria-controls="tabs-with-icons-2" role="tab">
 
                                 All Note
                             </button>
-                            <button type="button" class="hs-tab-active:font-semibold hs-tab-active:border-blue-600 hs-tab-active:text-blue-600 py-4 px-1 inline-flex items-center gap-2 border-b-[3px] border-transparent text-lg whitespace-nowrap text-gray-500 hover:text-blue-600" id="tabs-with-icons-item-3" data-hs-tab="#tabs-with-icons-3" aria-controls="tabs-with-icons-3" role="tab">
+                            <button type="button" className="hs-tab-active:font-semibold hs-tab-active:border-blue-600 hs-tab-active:text-blue-600 py-4 px-1 inline-flex items-center gap-2 border-b-[3px] border-transparent text-lg whitespace-nowrap text-gray-500 hover:text-blue-600" id="tabs-with-icons-item-3" data-hs-tab="#tabs-with-icons-3" aria-controls="tabs-with-icons-3" role="tab">
 
                                 Resource
                             </button>
@@ -102,7 +102,7 @@ const VideoPlayer = () => {
                         </nav>
                     </div>
 
-                    <div class="mt-3">
+                    <div className="mt-3">
                         <div id="tabs-with-icons-1" role="tabpanel" aria-labelledby="tabs-with-icons-item-1">
 
                             <div className='reviewContainer '>
@@ -144,11 +144,11 @@ const VideoPlayer = () => {
                         </div>
 
 
-                        <div id="tabs-with-icons-2" class="hidden" role="tabpanel" aria-labelledby="tabs-with-icons-item-2">
+                        <div id="tabs-with-icons-2" className="hidden" role="tabpanel" aria-labelledby="tabs-with-icons-item-2">
 
 
                             {
-                                notes?.map((note, index) => 
+                                notes?.map((note, index) =>
 
                                     // console.log(note.title)
                                     <div className="nodeList shadow-1xl">
@@ -160,18 +160,18 @@ const VideoPlayer = () => {
 
 
                         </div>
-                        <div id="tabs-with-icons-3" class="hidden resource" role="tabpanel" aria-labelledby="tabs-with-icons-item-3"
+                        <div id="tabs-with-icons-3" className="hidden resource" role="tabpanel" aria-labelledby="tabs-with-icons-item-3"
                         >
 
                             <div>
                                 <h3>GitHub Repository</h3>
-                                <p class="text-gray-500 dark:text-gray-400">
+                                <p className="text-gray-500 dark:text-gray-400">
                                     GitHub: https://github.com/shohidul-jaman-anik
                                 </p>
                             </div>
                             <div>
                                 <h3>Leson Related Importent Link</h3>
-                                <p class="text-gray-500 dark:text-gray-400">
+                                <p className="text-gray-500 dark:text-gray-400">
                                     w3school : https://www.w3schools.com/REACT/DEFAULT.ASP
                                 </p>
                             </div>
@@ -184,9 +184,9 @@ const VideoPlayer = () => {
                 {/*---------------- Accrodion------------ */}
 
 
-                <div class="hs-accordion-group">
-                    <div class="hs-accordion active" id="hs-basic-with-title-and-arrow-stretched-heading-one">
-                        <button class="hs-accordion-toggle hs-accordion-active:text-blue-600 group py-3 inline-flex items-center justify-between gap-x-3 w-full font-semibold text-left text-gray-800 transition hover:text-gray-500 dark:hs-accordion-active:text-blue-500 dark:text-gray-200 dark:hover:text-gray-400" aria-controls="hs-basic-with-title-and-arrow-stretched-collapse-one">
+                <div className="hs-accordion-group">
+                    <div className="hs-accordion active" id="hs-basic-with-title-and-arrow-stretched-heading-one">
+                        <button className="hs-accordion-toggle hs-accordion-active:text-blue-600 group py-3 inline-flex items-center justify-between gap-x-3 w-full font-semibold text-left text-gray-800 transition hover:text-gray-500 dark:hs-accordion-active:text-blue-500 dark:text-gray-200 dark:hover:text-gray-400" aria-controls="hs-basic-with-title-and-arrow-stretched-collapse-one">
                             <span className="text-2xl">Module-1</span>
 
                             <ProgressBar
@@ -202,14 +202,14 @@ const VideoPlayer = () => {
                                 maxCompleted={100}
                                 customLabel={`${watchedVideoCount / totalVideoCount * 100}%`}
                             />
-                            <svg class="hs-accordion-active:hidden hs-accordion-active:text-blue-600 hs-accordion-active:group-hover:text-blue-600 block w-3 h-3 text-gray-600 group-hover:text-gray-500 dark:text-gray-400" width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M2 5L8.16086 10.6869C8.35239 10.8637 8.64761 10.8637 8.83914 10.6869L15 5" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+                            <svg className="hs-accordion-active:hidden hs-accordion-active:text-blue-600 hs-accordion-active:group-hover:text-blue-600 block w-3 h-3 text-gray-600 group-hover:text-gray-500 dark:text-gray-400" width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M2 5L8.16086 10.6869C8.35239 10.8637 8.64761 10.8637 8.83914 10.6869L15 5" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
                             </svg>
-                            <svg class="hs-accordion-active:block hs-accordion-active:text-blue-600 hs-accordion-active:group-hover:text-blue-600 hidden w-3 h-3 text-gray-600 group-hover:text-gray-500 dark:text-gray-400" width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M2 11L8.16086 5.31305C8.35239 5.13625 8.64761 5.13625 8.83914 5.31305L15 11" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+                            <svg className="hs-accordion-active:block hs-accordion-active:text-blue-600 hs-accordion-active:group-hover:text-blue-600 hidden w-3 h-3 text-gray-600 group-hover:text-gray-500 dark:text-gray-400" width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M2 11L8.16086 5.31305C8.35239 5.13625 8.64761 5.13625 8.83914 5.31305L15 11" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
                             </svg>
                         </button>
-                        <div id="hs-basic-with-title-and-arrow-stretched-collapse-one" class="hs-accordion-content w-full overflow-hidden transition-[height] duration-300" aria-labelledby="hs-basic-with-title-and-arrow-stretched-heading-one">
+                        <div id="hs-basic-with-title-and-arrow-stretched-collapse-one" className="hs-accordion-content w-full overflow-hidden transition-[height] duration-300" aria-labelledby="hs-basic-with-title-and-arrow-stretched-heading-one">
                             {
                                 videos.map(video => (
                                     <div
