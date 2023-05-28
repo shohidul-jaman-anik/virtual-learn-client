@@ -39,7 +39,7 @@ const VideoPlayer = () => {
     const complete = watchedVideoCount / (totalVideoCount + 1) * 100
 
 
-
+    // ============= For Note ==============
 
     const onSubmit = data => {
         // console.log(data)
@@ -89,7 +89,7 @@ const VideoPlayer = () => {
             .then(result => {
                 // console.log(result, "Bookmark  result")
                 if (result) {
-                 
+
                     setBookmark(prevNotes => [...prevNotes, bookmarVideo]);
                 }
             }
