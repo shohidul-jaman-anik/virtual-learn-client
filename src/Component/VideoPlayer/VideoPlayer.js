@@ -11,6 +11,7 @@ const VideoPlayer = () => {
     const [watchedVideos, setWatchedVideos] = useState([]);
     const [message, setMessage] = useState([]);
     const [notes, setNote] = useState([]);
+    const [bookmark, setBookmark] = useState([]);
     const { register, handleSubmit, reset, formState: { errors } } = useForm();
 
     useEffect(() => {
@@ -69,6 +70,42 @@ const VideoPlayer = () => {
             });
     }, []);
 
+
+    //============ For Bookmark ==============
+
+    const handleBookmark = (bookmarkId) => {
+        // console.log(bookmarkId, "BookmarkId")
+        const bookmarVideo = videos.find(video => video.id == bookmarkId);
+
+        const url = `https://virtual-learn.onrender.com/addBookmark`
+        fetch(url, {
+            method: "POST",
+            headers: {
+                'content-type': "application/json"
+            },
+            body: JSON.stringify(bookmarVideo)
+        })
+            .then(res => res.json())
+            .then(result => {
+                // console.log(result, "Bookmark  result")
+                if (result) {
+                 
+                    setBookmark(prevNotes => [...prevNotes, bookmarVideo]);
+                }
+            }
+            )
+    }
+
+    useEffect(() => {
+        fetch('https://virtual-learn.onrender.com/allBookmark')
+            .then(res => res.json())
+            .then(data => {
+                setBookmark(data.result)
+                console.log(data, "Bookmark data")
+            });
+    }, []);
+
+
     return (
         <div className="videoContainer">
             <div>
@@ -78,6 +115,9 @@ const VideoPlayer = () => {
 
                 </div>
                 <h3 className='videoTitle'>{selectedVideo?.title}</h3>
+
+                <button className="btn btn-xs mt-3" onClick={() => handleBookmark(selectedVideo?.id)}>Bookmark</button>
+                <p className="">{bookmark?.message}</p>
             </div>
 
             <div className="VideodownSection">
@@ -96,6 +136,10 @@ const VideoPlayer = () => {
                             <button type="button" className="hs-tab-active:font-semibold hs-tab-active:border-blue-600 hs-tab-active:text-blue-600 py-4 px-1 inline-flex items-center gap-2 border-b-[3px] border-transparent text-lg whitespace-nowrap text-gray-500 hover:text-blue-600" id="tabs-with-icons-item-3" data-hs-tab="#tabs-with-icons-3" aria-controls="tabs-with-icons-3" role="tab">
 
                                 Resource
+                            </button>
+                            <button type="button" className="hs-tab-active:font-semibold hs-tab-active:border-blue-600 hs-tab-active:text-blue-600 py-4 px-1 inline-flex items-center gap-2 border-b-[3px] border-transparent text-lg whitespace-nowrap text-gray-500 hover:text-blue-600" id="tabs-with-icons-item-4" data-hs-tab="#tabs-with-icons-4" aria-controls="tabs-with-icons-4" role="tab">
+
+                                Bookmark
                             </button>
 
 
@@ -175,6 +219,18 @@ const VideoPlayer = () => {
                                     w3school : https://www.w3schools.com/REACT/DEFAULT.ASP
                                 </p>
                             </div>
+                        </div>
+
+                        <div id="tabs-with-icons-4" className="hidden " role="tabpanel" aria-labelledby="tabs-with-icons-item-4"
+
+                        >
+
+                            {
+                                bookmark?.map(b => <div className="nodeList shadow-1xl">
+                                    <h3>{b?.title}</h3>
+                                </div>)
+                            }
+
                         </div>
 
                     </div>
