@@ -1,7 +1,8 @@
 import { createBrowserRouter } from "react-router-dom";
 import Main from "../../Layout/Main/Main";
 import About from "../About/About";
-import Home from "../Home/Home";
+import Home from "../Home/Home/Home";
+
 
 
 const routes = createBrowserRouter([
@@ -16,7 +17,6 @@ const routes = createBrowserRouter([
         ]
     },
     { path: "*", element: <div>This Page is not found</div> }
-   
 
 ])
 
